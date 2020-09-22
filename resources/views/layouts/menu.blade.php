@@ -14,11 +14,11 @@
                 <a class="nav-link" href="{{ route('pages.index') }}">All Pages</a>
             </li>
 
-            <li class="nav-item {{\Route::currentRouteName()==='pages.show' ? 'active' : ''}}">
-                <a class="nav-link" href="{{ route('pages.show', ['id' => 123]) }}">Page 123</a>
+            <li class="nav-item {{\Route::currentRouteName()==='posts.index' ? 'active' : ''}}">
+                <a class="nav-link" href="{{ route('posts.index', ['id' => 123]) }}">รายการโพสต์ทั้งหมด</a>
             </li>
             {{-- {{ url()->current() }} --}}
             {{-- {{ \Route::currentRouteName() }} --}}
-        </ul>        
+        </ul>
     </div>
 </nav>
