@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/home', [PagesController::class,'index']);
+Route::get('/home', [PagesController::class,'index']);
 Route::get('/pages', [PagesController::class, 'index']) ->name('pages.index');
 Route::get('/pages/{id}',[PagesController::class, 'show']) ->name('pages.show');
 Route:: resource('/posts',PostController::class);
