@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
+
+//    this post belongs to one user
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

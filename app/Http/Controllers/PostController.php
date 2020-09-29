@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -48,6 +49,9 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $request->input('title');
         $post->content = $request->input('content');
+//        $post->user_id = $request->user()->id;
+//        ตอนเราสร้างโพสต์ก็จะดึงชื่อ  username  เขียนลงดาต้าเบส
+        $post->user_id = Auth::user()->id;
         $post->save();
         return redirect()->route('posts.index');
     }
