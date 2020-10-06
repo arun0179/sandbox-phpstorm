@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -31,6 +32,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create-post')){
+            return redirect()->route('posts.index');
+        }
         return view('posts.create');
     }
 
@@ -83,6 +87,11 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+//        if(Gate::denies('edit-post', $post)){
+//            return redirect()->route('post.show',['post'=>$id]);
+//        }
+        //update() in PostPolicy
+        $this->authorize('update',$post);
         return view('posts.edit', [
             'post' => $post
         ]);

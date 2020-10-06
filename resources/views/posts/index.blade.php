@@ -4,10 +4,16 @@
     <h1>รายการโพสต์ทั้งหมด</h1>
 
     @if(Auth::check())
-    <a href="{{route('posts.create')}}" class="mb-3" style="font-size:30px">สร้างโพสต์ใหม่</a>
-    <p>Hello {{  Auth::user()->name }}</p>
+{{--        <a href="{{route('posts.create')}}" class="mb-3" style="font-size:30px">สร้างโพสต์ใหม่</a>--}}
+        <p>Hello {{  Auth::user()->name }}</p>
     @endif
-    {{$posts->links()}}
+
+    @if(Auth::check() && Gate::allows('create-post'))
+        <a href="{{route('posts.create')}}">สร้างโพสต์ใหม่</a>
+    @else
+        <p>คุณไม่มีสิทธิ์ในการสร้างโพสต์</p>
+    @endif
+{{--    {{$posts->links()}}--}}
 
     @foreach($posts as $post)
         <div class="card mb-3" style="width: 45rem;">

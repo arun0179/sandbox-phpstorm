@@ -25101,7 +25101,7 @@ var render = function() {
               _c("div", { staticClass: "flex-shrink-0 flex items-center" }, [
                 _c(
                   "a",
-                  { attrs: { href: "/dashboard" } },
+                  { attrs: { href: "/posts" } },
                   [
                     _c("jet-application-mark", {
                       staticClass: "block h-9 w-auto"
@@ -25119,13 +25119,13 @@ var render = function() {
                     "jet-nav-link",
                     {
                       attrs: {
-                        href: "/dashboard",
+                        href: "/posts",
                         active: _vm.$page.currentRouteName == "dashboard"
                       }
                     },
                     [
                       _vm._v(
-                        "\n                            Dashboard\n                        "
+                        "\n                            Go to All Posts\n                        "
                       )
                     ]
                   )
