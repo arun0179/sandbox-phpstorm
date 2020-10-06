@@ -8,11 +8,12 @@
         <p>Hello {{  Auth::user()->name }}</p>
     @endif
 
-    @if(Auth::check() && Gate::allows('create-post'))
+{{--    @if(Auth::check() && Gate::allows('create-post'))--}}
+    @can('create', \App\Models\Post::class)
         <a href="{{route('posts.create')}}">สร้างโพสต์ใหม่</a>
     @else
         <p>คุณไม่มีสิทธิ์ในการสร้างโพสต์</p>
-    @endif
+    @endcan
 {{--    {{$posts->links()}}--}}
 
     @foreach($posts as $post)

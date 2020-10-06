@@ -18,7 +18,8 @@ class PostController extends Controller
     {
         //all objects in Post_table in posts;
         //Paginate: หนึ่งหน้าจะมีกี่ดาต้า ; 1 pages 10 data
-        $posts = Post::paginate(10);
+//        $posts = Post::paginate(10);
+        $posts = Post::all();
         //view(resources/views/posts/index)
         return view('posts.index', [
             'posts' => $posts
@@ -32,9 +33,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('create-post')){
-            return redirect()->route('posts.index');
-        }
+//        if(Gate::denies('create-post')){
+//            return redirect()->route('posts.index');
+//        }
+        $this->authorize('create', Post::class);
         return view('posts.create');
     }
 
@@ -46,6 +48,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
         $request->validate([
             'title'=>'required|min:5|max:100',
             'content'=>'required|min:5|max:500'
