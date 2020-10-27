@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostCollection;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Resources\Post as PostResource;
 
 class PostsController extends Controller
 {
@@ -13,10 +15,17 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $post = Post::all();
-        return $post;
+        $posts = Post::where('user_id',$request->user()->id)->orderBy('created_at', 'DESC')->get();
+        return new PostCollection($posts);
+    }
+    public function search(Request $request, $title){
+        $posts = Post::where('user_id', $request->user()->id)->where('title','LIKE','%'.$title.'%')
+            ->orderBy('created_at', 'DESC')->get();
+//        return ($posts);
+//        return PostResource::collection($posts);
+        return new PostCollection($posts);
     }
 
     /**

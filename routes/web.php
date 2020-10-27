@@ -26,3 +26,11 @@ Route:: resource('/posts',PostController::class);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware('auth:api')->get('/name', function () {
+    $data = new \Cassandra\Map();
+    $data->name = "name";
+    $data->id = "id";
+    $data = json_encode($data);
+    return $data;
+});
